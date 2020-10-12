@@ -14,7 +14,7 @@ fi
 echo "Generating template $1 with ID $2, with image from $3"
 
 echo "Defining Template VM"
-#qm create 9000 --name "$1" --memory $BASEMEMORY --net0 virtio,bridge=vmbr0
+qm create 9000 --name "$1" --memory $BASEMEMORY --net0 virtio,bridge=vmbr0
 
 echo "Checking extension of image."
 if [ "${IMAGE: -4}" == ".img" ]
