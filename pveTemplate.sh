@@ -28,10 +28,10 @@ if [ "${IMAGE: -4}" == ".img" ]
 fi
 
 echo "Importing the image into Proxmox"
-DISKNAME = $(qm importdisk $TEMPLATEID $IMAGE local-lvm)
+qm importdisk $TEMPLATEID $IMAGE local-lvm
 
 echo "Configuring the Template VM to use the new Image"
-qm set $TEMPLATEID --scsihw virtio-scsi-pci --scsi0 local-lvm:$DISKNAME
+qm set $TEMPLATEID --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-$TEMPLATEID-disk-0
 
 echo "Adding the Cloud-init image as the CD-Rom drive"
 qm set $TEMPLATEID --ide2 local:lvm:cloudinit
